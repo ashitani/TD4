@@ -10,6 +10,14 @@ import sdl2.ext
 class TD4:
 
     def __init__(self):
+
+        self.clock=10 #[Hz]
+        self.time=0
+
+        self.rom=[0 for i in range(16)]
+        self.reset()
+
+    def reset(self):
         self.a=0
         self.b=0
         self.c=0
@@ -18,10 +26,6 @@ class TD4:
         self.inp=0
         self.out=0
 
-        self.clock=10 #[Hz]
-        self.time=0
-
-        self.rom=[0 for i in range(16)]
 
     def dump_reg(self):
         txt=""
@@ -137,6 +141,7 @@ class TD4:
         self.pc_old = self.pc
         sdl2.ext.init()
 
+        self.reset()
         while(True):
 
             instruction = self.rom[self.pc]
@@ -155,9 +160,12 @@ class TD4:
                 if event.type == sdl2.SDL_KEYUP:
                     k = event.key.keysym.sym
                     if k>96 and k<103:
-                        self.inp = k-87 # A-F
+                        self.inp = k-87 # A-F -> 10-15
                     if k>47 and k<58:
-                        self.inp = k-48 # 0-9
+                        self.inp = k-48 # 0-9 -> 0-9
+                    if k==113: # Q to reset
+                        self.pc_old=-1
+                        self.reset()
 
     def set_rom(self,rom):
         for i,x in enumerate(rom):
