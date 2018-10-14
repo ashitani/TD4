@@ -1,2 +1,8 @@
 # TD4
-TD4 emulator/assembler 
+
+[CPUの創りかた](https://www.amazon.co.jp/dp/4839909865) に登場するTD4に関するレポジトリです。
+
+## エミュレータ・アセンブラ
+
+emulaterフォルダを参照ください。
+
