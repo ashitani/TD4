@@ -5,10 +5,10 @@
 
 74ロジックICのライブラリは[こちら](https://github.com/TimRudy/ice-chips-verilog)を使用しました。
 
-# ROMデータの作成
+# ROMデータのコピー
 
-assember.pyでアセンブルしたテキストファイルをrom.txtに
-コピーします。
+アセンブルの仕方はemulatorフォルダを参照ください。
+アセンブル済のテキストファイルをrom.txtにコピーします。
 
 ```
 cp rom/ramen.txt ./rom.txt
