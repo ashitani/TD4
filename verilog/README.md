@@ -14,7 +14,7 @@ assember.pyでアセンブルしたテキストファイルをrom.txtに
 cp rom/ramen.txt ./rom.txt
 ```
 
-# シミュレーションと
+# シミュレーションと波形確認
 
 iverilog/gtkwaveが必要です。
 
