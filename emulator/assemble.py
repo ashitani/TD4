@@ -11,4 +11,4 @@ file = sys.argv[1]
 
 td4=TD4()
 td4.load_asm(file)
-td4.dump_rom()
+td4.dump_rom2()

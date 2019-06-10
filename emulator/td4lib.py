@@ -135,6 +135,61 @@ class TD4:
         return r
 
 
+    def eval_simple(self, data):
+        self.write_registers(data)
+        self.step_run_simple(data[5]&0xff)
+        return self.read_registers()
+
+    def eval(self, data):
+        self.write_memories(data)
+        self.step_run()
+        return self.read_memories()
+
+    def write_registers(self, data):
+        self.a    = data[0]&0x0f
+        self.b    = data[1]&0x0f
+        self.c    = data[2]&0x0f
+        self.pc   = data[3]&0xff
+        self.inp  = data[4]&0x0f
+
+    def read_registers(self):
+        data=[]
+        data.append(self.a)
+        data.append(self.b)
+        data.append(self.c)
+        data.append(self.pc)
+        data.append(self.out)
+        return data
+
+
+    def write_memories(self, data):
+        self.a   = data[0]&0x0f
+        self.b   = data[1]&0x0f
+        self.c   = data[2]&0x0f
+        self.pc  = data[3]&0xff
+        self.inp = data[4]&0x0f
+        self.set_rom(data[5:])
+
+    def read_memories(self):
+        data=[]
+        data.append(self.a)
+        data.append(self.b)
+        data.append(self.c)
+        data.append(self.pc)
+        data.append(self.out)
+        data+=self.rom
+        return data
+
+    def step_run(self):
+        code = self.rom[self.pc]
+        self.pc = self.exec_code(code)
+        self.pc &= 0xf
+
+    def step_run_simple(self, code):
+        self.pc = self.exec_code(code)
+        self.pc &= 0xf
+
+
     def run(self, start_pc=0, freq=10):
         self.clock=float(freq)
         self.pc=start_pc
@@ -144,9 +199,10 @@ class TD4:
         self.reset()
         while(True):
 
-            instruction = self.rom[self.pc]
-            self.pc = self.exec_code(instruction)
-            self.pc &= 0xf
+            self.step_run()
+            # instruction = self.rom[self.pc]
+            # self.pc = self.exec_code(instruction)
+            # self.pc &= 0xf
             self.dump_reg()
             if self.pc_old==self.pc:
                 print("HALTED")
@@ -278,6 +334,10 @@ class TD4:
         for i,l in enumerate(self.rom):
             bin_str = format(l, '08b')
             print("%01X: 0x%02X 0b%s" % (i,l,bin_str))
+
+    def dump_rom2(self):
+        for i,l in enumerate(self.rom):
+            print("%02X" % l)
 
 
 '''
