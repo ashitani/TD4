@@ -6,3 +6,6 @@
 
 emulaterフォルダを参照ください。
 
+## Verilog実装とRTLシミュレーション
+
+verilogフォルダを参照ください。
