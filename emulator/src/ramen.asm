@@ -12,5 +12,5 @@ LOOP5:  OUT 0b0000
         OUT 0b0100
         ADD A,1
         JNC LOOP5
-        OUT 0b0100
+        OUT 0b1000
 HALT:   JMP HALT

@@ -12,13 +12,13 @@ initial begin
     $dumpvars(0,test_TD4);
 
     clk=0; rst=1; io_in=0;
-#10 rst=0;
-#20 rst=1;
+#5 rst=0;
+#10 rst=1;
 #1000 io_in=1; // for io.asm
-#5000 $finish;
+#3000 $finish;
 end
 
-always #10
+always #5
     clk <= ~clk;
 
 endmodule
