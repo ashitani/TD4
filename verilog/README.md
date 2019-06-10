@@ -18,6 +18,8 @@ cp rom/ramen.txt ./rom.txt
 
 iverilog/gtkwaveが必要です。
 
+また、上述の74ロジックのライブラリを\~/git/ice-chips-verilogにclone済と仮定しています。
+
 ```
 make
 open ./test_TD4.vcd
